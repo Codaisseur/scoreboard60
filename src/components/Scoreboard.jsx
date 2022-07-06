@@ -24,12 +24,23 @@ export default function Scoreboard() {
     setPlayers(updatedPlayers);
   }
 
+  const addPlayer = (name) => {
+    //1. Define a new player
+    const newPlayer = { id: players.length + 1, name: name, score: 0}
+    //2. Add the new player to the array
+    const newPlayersArray = [ ...players, newPlayer]
+    //3. Add the new array to the state
+    setPlayers(newPlayersArray)
+  }
+
   return (
     <div className="Scoreboard">
+      <Form addPlayer={addPlayer} />
       <p>Player's scores:</p>
       <ul>
         {players.map(p => 
           <Player 
+            key={p.id}
             name={p.name}
             id={p.id}
             score={p.score}
